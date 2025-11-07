@@ -53,7 +53,12 @@ func (exporter *Exporter) ExportToCSV() {
 
 	defer f.Close()
 
+	if _, err := f.Write([]byte{0xEF, 0xBB, 0xBF}); err != nil {
+		exporter.logger.Warn("Falha ao escrever BOM UTF-8", zap.Error(err))
+	}
+
 	writer := csv.NewWriter(f)
+	writer.Comma = ';'
 
 	defer writer.Flush()
 
