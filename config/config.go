@@ -34,7 +34,7 @@ func NewConfig() *viper.Viper {
 	conf.SetDefault("db.raw.path", "./dne")
 
 	conf.SetDefault("log.format", "json")
-	conf.SetDefault("log.level", "info")
+	conf.SetDefault("log.level", "debug")
 
 	conf.BindEnv()
 

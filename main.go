@@ -4,6 +4,7 @@ import (
 	"github.com/brasilcep/api/api"
 	"github.com/brasilcep/api/config"
 	"github.com/brasilcep/api/database"
+	"github.com/brasilcep/api/exporter"
 	"github.com/brasilcep/api/logger"
 	"github.com/brasilcep/api/zipcodes"
 )
@@ -41,6 +42,9 @@ func main() {
 		dnePath := config.GetString("db.raw.path")
 		zipcodesImporter := zipcodes.NewZipCodeImporter(logger)
 		zipcodesImporter.PopulateZipcodes(dnePath)
+	case "export":
+		exporter := exporter.NewExporter(logger)
+		exporter.ExportToCSV()
 	default:
 		logger.Fatal("Invalid mode specified")
 	}
